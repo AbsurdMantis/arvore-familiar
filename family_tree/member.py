@@ -111,3 +111,16 @@ class Member:
                 grandmother.children
             )
         )
+    
+    def get_maternal_uncle(self):
+        grandmother = self.get_maternal_grandmother()
+        if not grandmother:
+            return []
+        if not grandmother.children:
+            return []
+        return list(
+            filter(
+                lambda x: x.gender == Gender.male,
+                grandmother.children
+            )
+        )
