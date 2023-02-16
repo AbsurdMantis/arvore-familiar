@@ -124,3 +124,24 @@ class Member:
                 grandmother.children
             )
         )
+    
+    def get_sibling_spouses(self):
+        siblings = self.get_siblings()
+        if not siblings:
+            return []
+        sibling_spouses = [
+            sibling.spouse for sibling in siblings if sibling.spouse
+        ]
+        return sibling_spouses
+    
+    def get_siblings(self):
+        if not self.mother:
+            return []
+        if not self.mother.children:
+            return []
+        return list(
+            filter(
+                lambda x: x.name != self.name,
+                self.mother.children
+            )
+        )
