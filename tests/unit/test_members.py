@@ -267,3 +267,23 @@ class TestMember(TestCase):
         # to check that the mock_get_paternal_grandmother was called
         # instead of self.member.get_paternal_grandmother
         mock_get_maternal_grandmother.assert_called_with()
+
+    @patch('family_tree.member.Member.get_siblings', return_value=[
+        create_fake_member(
+            name="A", gender=Gender.male, spouse=create_fake_member(
+                name="B", gender=Gender.female, spouse=create_fake_member(
+                    name="A")
+            )
+        ),
+        create_fake_member(
+            name="C", gender=Gender.female, spouse=create_fake_member(
+                name="D", gender=Gender.male, spouse=create_fake_member(
+                    name="C")
+            )
+        ),
+        create_fake_member(
+            name="C", gender=Gender.female
+        )
+    ])
+    def test_get_sibling_spouses(self, mock_get_siblings):
+        self.assertEqual(len(self.member.get_sibling_spouses()), 2)
