@@ -1,5 +1,5 @@
 from unittest import TestCase
-from ...family_tree.member import Member, Gender
+from family_tree import Member, Gender
 
 class TestMember(TestCase):
     
