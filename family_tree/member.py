@@ -145,3 +145,9 @@ class Member:
                 self.mother.children
             )
         )
+    
+    def get_spouse_siblings(self):
+        if not self.spouse:
+            return []
+        return self.spouse.get_siblings()
+
