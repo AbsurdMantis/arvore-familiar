@@ -160,3 +160,13 @@ class Member:
                 self.children
             )
         )
+    
+    def get_daughter(self):
+        if not self.children:
+            return []
+        return list(
+            filter(
+                lambda x: x.gender == Gender.female,
+                self.children
+            )
+        )
