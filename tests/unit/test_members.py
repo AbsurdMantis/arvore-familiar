@@ -324,3 +324,27 @@ class TestMember(TestCase):
         self.assertEqual(len(daughters), 1)
         self.assertEqual(daughters[0].name, "Daughter")
         self.assertEqual(daughters[0].gender, Gender.female)
+    
+    @patch('family_tree.member.Member.get_spouse_siblings', return_value=[
+        create_fake_member(name="A", gender=Gender.male),
+        create_fake_member(name="B", gender=Gender.female)
+    ])
+    @patch('family_tree.member.Member.get_sibling_spouses', return_value=[
+        create_fake_member(name="C", gender=Gender.male),
+        create_fake_member(name="D", gender=Gender.female)
+    ])
+    def test_get_brother_in_law(self, mock_get_sibling_spouses,
+                                mock_get_spouse_siblings):
+        self.assertEqual(len(self.member.get_brother_in_law()), 2)
+
+    @patch('family_tree.member.Member.get_spouse_siblings', return_value=[
+        create_fake_member(name="A", gender=Gender.male),
+        create_fake_member(name="B", gender=Gender.female)
+    ])
+    @patch('family_tree.member.Member.get_sibling_spouses', return_value=[
+        create_fake_member(name="C", gender=Gender.male),
+        create_fake_member(name="D", gender=Gender.female)
+    ])
+    def test_get_sister_in_law(self, mock_get_sibling_spouses,
+                               mock_get_spouse_siblings):
+        self.assertEqual(len(self.member.get_sister_in_law()), 2)
