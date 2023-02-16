@@ -151,3 +151,12 @@ class Member:
             return []
         return self.spouse.get_siblings()
 
+    def get_son(self):
+        if not self.children:
+            return []
+        return list(
+            filter(
+                lambda x: x.gender == Gender.male,
+                self.children
+            )
+        )
