@@ -70,3 +70,23 @@ class TestMember(TestCase):
 
         # error case
         self.assertRaises(ValueError, self.member.add_child, child_demo_a)
+        
+         # success case
+        self.member.add_child(child_demo_b)
+        self.assertEqual(len(self.member.children), 1)
+        self.assertEqual(self.member.children[0].name, "Daughter")
+        self.assertEqual(self.member.children[0].gender, Gender.female)
+        
+    def test_get_paternal_grandmother(self):
+        member = Member(9, "Newmember", "Male")
+        father = Member(10, "Newmember_father", "Male")
+        grandmother = Member(11, "Newmember_grandmother", "Female")
+
+        # error cases
+        self.assertEqual(member.get_paternal_grandmother(), None)
+
+        member.father = father
+        self.assertEqual(member.get_paternal_grandmother(), None)
+
+        member.father.mother = grandmother
+        self.assertEqual(member.get_paternal_grandmother(), grandmother)
