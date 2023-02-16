@@ -124,7 +124,7 @@ class TestMember(TestCase):
     @patch('family_tree.member.Member.get_paternal_grandmother', return_value = None)
     def test_get_paternal_aut(self, mock_get_paternal_grandmother):
         #check if replaced by mock
-        self.assertEqual(isinstance(self.member.get_paternal_grandmother, Mock))
+        self.assertEqual(isinstance(self.member.get_paternal_grandmother, Mock), True)
         
         #check for None
-        self.assertEqual(self.member.get_paternal_aunt)
+        self.assertEqual(self.member.get_paternal_aunt(), 'NONE')
