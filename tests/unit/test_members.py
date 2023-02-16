@@ -296,3 +296,17 @@ class TestMember(TestCase):
             create_fake_member(name="B")
         ]
         self.assertEqual(len(self.member.get_spouse_siblings()), 2)
+
+    def test_get_son(self):
+        member = Member(5, "Dummy", "Male")
+        son = Member(7, "Son", "Male")
+        daughter = Member(7, "Daughter", "Female")
+
+        self.assertEqual(member.get_son(), [])
+        member.children.append(daughter)
+        self.assertEqual(member.get_son(), [])
+        member.children.append(son)
+        sons = member.get_son()
+        self.assertEqual(len(sons), 1)
+        self.assertEqual(sons[0].name, "Son")
+        self.assertEqual(sons[0].gender, Gender.male)
