@@ -63,3 +63,10 @@ class Member:
         if not self.mother.mother:
             return None
         return self.mother.mother
+    
+    def get_spouse_mother(self):
+        if not self.spouse:
+            return None
+        if not self.spouse.mother:
+            return None
+        return self.spouse.mother
