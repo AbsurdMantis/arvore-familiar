@@ -170,3 +170,25 @@ class Member:
                 self.children
             )
         )
+        
+    def get_brother_in_law(self):
+        results = self.get_sibling_spouses() + self.get_spouse_siblings()
+        if not results:
+            return []
+        return list(
+            filter(
+                lambda x: x.gender == Gender.male,
+                results
+            )
+        )
+    
+    def get_sister_in_law(self):
+        results = self.get_sibling_spouses() + self.get_spouse_siblings()
+        if not results:
+            return []
+        return list(
+            filter(
+                lambda x: x.gender == Gender.female,
+                results
+            )
+        )
