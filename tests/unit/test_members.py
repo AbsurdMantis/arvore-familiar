@@ -287,3 +287,12 @@ class TestMember(TestCase):
     ])
     def test_get_sibling_spouses(self, mock_get_siblings):
         self.assertEqual(len(self.member.get_sibling_spouses()), 2)
+
+    def test_get_spouse_siblings(self):
+        self.assertEqual(len(self.member.get_spouse_siblings()), 0)
+        self.member.spouse = create_fake_member(name="Wife")
+        self.member.spouse.get_siblings.return_value = [
+            create_fake_member(name="A"),
+            create_fake_member(name="B")
+        ]
+        self.assertEqual(len(self.member.get_spouse_siblings()), 2)
