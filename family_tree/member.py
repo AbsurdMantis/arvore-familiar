@@ -83,3 +83,17 @@ class Member:
                 grandmother.children
             )
         )
+    
+    def get_paternal_uncle(self):
+        grandmother = self.get_paternal_grandmother()
+        if not grandmother:
+            return []
+        if not grandmother.children:
+            return []
+        return list(
+            filter(
+                lambda x: x.gender == Gender.male and
+                x.name != self.father.name,
+                grandmother.children
+            )
+        )
